@@ -35,6 +35,9 @@ git clone https://github.com/r3ps4J/r3_pawnshop
 ensure r3_pawnshop
 ```
 
+## Credits
+I used some of the code from [esx_drugs](https://github.com/ESX-Org/esx_drugs).
+
 ## Discord:
 If you want to contact me or require help you could join my discord server, I can't guarantee that I will be able to help you.
 * [Discord Server](https://discord.gg/bEWmBbg)

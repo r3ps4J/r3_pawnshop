@@ -22,7 +22,7 @@ Citizen.CreateThread(function()
 		local coords = GetEntityCoords(playerPed)
 		if GetDistanceBetweenCoords(coords, vector3(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z), true) < 1.5 then
 			if Config.EnableOpeningHours then
-				if GetClockHours() >= 9 and GetClockHours() <= 18 then
+				if GetClockHours() >= Config.OpenHour and GetClockHours() <= Config.CloseHour - 1 then
 					if not menuOpen then
 						Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
 						if IsControlJustReleased(0, 38) then

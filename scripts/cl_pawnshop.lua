@@ -22,18 +22,35 @@ Citizen.CreateThread(function()
 		local coords = GetEntityCoords(playerPed)
 		if GetDistanceBetweenCoords(coords, vector3(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z), true) < 1.5 then
 			if Config.EnableOpeningHours then
-				if GetClockHours() >= Config.OpenHour and GetClockHours() <= Config.CloseHour - 1 then
-					if not menuOpen then
-						Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
-						if IsControlJustReleased(0, 38) then
-							wasOpen = true
-							OpenPawnshop()
+				local ClockTime = GetClockHours()
+				if Config.CloseHour < Config.OpenHour then
+					if (ClockTime >= Config.OpenHour and ClockTime < 24) or (ClockTime <= Config.CloseHour -1 and ClockTime > 0) then
+						if not menuOpen then
+							Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
+							if IsControlJustReleased(0, 38) then
+								wasOpen = true
+								OpenPawnshop()
+							end
+						else
+								Citizen.Wait(500)
 						end
 					else
-							Citizen.Wait(500)
+						Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "Pawnshop Closed, opens at ~r~" .. Config.OpenHour ..":00")
 					end
 				else
-					Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "Pawnshop Closed, opens at ~r~" .. Config.OpenHour ..":00")
+					if ClockTime >= Config.OpenHour and ClockTime <= Config.CloseHour - 1 then
+						if not menuOpen then
+							Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
+							if IsControlJustReleased(0, 38) then
+								wasOpen = true
+								OpenPawnshop()
+							end
+						else
+								Citizen.Wait(500)
+						end
+					else
+						Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "Pawnshop Closed, opens at ~r~" .. Config.OpenHour ..":00")
+					end
 				end
 			else
 				if not menuOpen then

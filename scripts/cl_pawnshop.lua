@@ -1,6 +1,5 @@
 ESX = nil
 local menuOpen = false
-local wasOpen = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -28,7 +27,6 @@ Citizen.CreateThread(function()
 						if not menuOpen then
 							Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
 							if IsControlJustReleased(0, 38) then
-								wasOpen = true
 								OpenPawnshop()
 							end
 						else
@@ -42,7 +40,6 @@ Citizen.CreateThread(function()
 						if not menuOpen then
 							Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
 							if IsControlJustReleased(0, 38) then
-								wasOpen = true
 								OpenPawnshop()
 							end
 						else
@@ -56,7 +53,6 @@ Citizen.CreateThread(function()
 				if not menuOpen then
 					Draw3DText(Config.PawnshopLocation.x, Config.PawnshopLocation.y, Config.PawnshopLocation.z, "~g~E~w~ - Open the Pawnshop")
 					if IsControlJustReleased(0, 38) then
-						wasOpen = true
 						OpenPawnshop()
 					end
 				else
@@ -64,8 +60,8 @@ Citizen.CreateThread(function()
 				end
 			end
 		else
-			if wasOpen then
-				wasOpen = false
+			if menuOpen then
+				menuOpen = false
 				ESX.UI.Menu.CloseAll()
 			end
 
